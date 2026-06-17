@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1: Responsive Layout</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Variables for 2025 Aesthetics --- */
+        :root {
+            /* Color Palette */
+            --clr-mocha-mousse: #A5856F; /* Stability */
+            --clr-ethereal-blue: #A0D4E0; /* Trust */
+            --clr-moonlit-grey: #F2F0EA; /* Refinement */
+            
+            /* Typography */
+            --font-heading: 'Inter', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        /* --- Base Reset & Mobile-First Foundation --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--clr-moonlit-grey);
+            color: #333;
+            line-height: 1.6;
+            
+            /* Sticky Footer Fix */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, .logo {
+            font-family: var(--font-heading);
+        }
+
+        /* Fluid Typography using clamp() */
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        /* --- Micro Components: Flexbox --- */
+        .main-header {
+            background-color: var(--clr-mocha-mousse);
+            color: white;
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .mobile-menu-btn {
+            display: none; /* Hidden on desktop by default */
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .cta-button {
+            background-color: var(--clr-ethereal-blue);
+            color: #000;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-heading);
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* --- Macro Layouts: CSS Grid --- */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Start with a single column */
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            
+            /* Sticky Footer Fix */
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .main-article {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--clr-ethereal-blue);
+        }
+
+        .main-footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* --- Media Queries (min-width logic) --- */
+
+        /* Mobile Navigation Breakpoint */
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none; /* Hide standard links on mobile */
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: var(--clr-mocha-mousse);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                padding: 1rem 0;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block; /* Show hamburger on mobile */
+            }
+        }
+
+        /* Tablet: 768px */
+        @media (min-width: 768px) {
+            .content-grid {
+                /* Expand layout to 2 columns for tablet and up */
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Desktop: 1024px */
+        @media (min-width: 1024px) {
+            .content-grid {
+                gap: 3rem;
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="nav-container">
+            <div class="logo">DecodeLabs</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="menuToggle">☰</button>
+        </nav>
+    </header>
+
+    <main class="content-grid"> 
+        
+        <article class="main-article"> 
+            <h1>The Vision: fully Responsive design for all</h1>
+            <p>digital experience that honors the Mobile-First paradigm. The web is a dynamic, inclusive information system.</p>
+            <button class="cta-button">Build the Future</button>
+        </article>
+
+        <aside class="sidebar">
+            <h2>Standards</h2>
+            <ul>
+                <li>Semantic Integrity</li>
+                <li>new UI/UX Compliance</li>
+                <li>Universal Access</li>
+            </ul>
+        </aside>
+
+    </main>
+
+    <footer class="main-footer"> 
+        <p>&copy; 2026 DecodeLabs Internship Program. All rights reserved.</p>
+    </footer>
+
+  <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Mobile Menu Logic (Pehle wala)
+            const menuBtn = document.getElementById("menuToggle");
+            const navLinks = document.querySelector(".nav-links");
+
+            if (menuBtn) {
+                menuBtn.addEventListener("click", () => {
+                    navLinks.classList.toggle("active");
+                });
+            }
+
+            // --- NAYA CODE: Backend Integration ---
+            const ctaButton = document.querySelector(".cta-button");
+            
+            if (ctaButton) {
+                ctaButton.addEventListener("click", async () => {
+                    // Button ka text change karein taake user ko processing ka pata chale
+                    const originalText = ctaButton.innerText;
+                    ctaButton.innerText = "Processing...";
+
+                    try {
+                        // 1. Backend API ko POST request bhej kar Naya User Create karein
+                        const newUser = { 
+                            name: "Test Intern", 
+                            email: `intern${Date.now()}@decodelabs.tech`, // Har dafa naya email generate hoga 
+                            role: "intern" 
+                        };
+
+                        const postResponse = await fetch('http://localhost:3000/api/users', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(newUser)
+                        });
+
+                        const postData = await postResponse.json();
+
+                        if (postResponse.ok) {
+                            alert(`Success! User Created in Database: ${postData.name}`);
+                            
+                            // 2. Ab Database se tamam users ko GET request se wapas mangwayein
+                            const getResponse = await fetch('http://localhost:3000/api/users');
+                            const allUsers = await getResponse.json();
+                            
+                            console.log("Dosto, yeh raha Database ka Data:", allUsers);
+                            alert("F12 daba kar Console check karein! Wahan sab users ka data aa chuka hai.");
+                        } else {
+                            alert("Error: " + postData.error);
+                        }
+
+                    } catch (error) {
+                        console.error("Backend connection fail ho gaya:", error);
+                        alert("Connection failed! Kya aapka 'node server.js' terminal mein chal raha hai?");
+                    } finally {
+                        ctaButton.innerText = originalText;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
